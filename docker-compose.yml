@@ -12,7 +12,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ../ndent:/var/www/html:delegated
+      - ../thesmoov_ref:/var/www/html:delegated
     depends_on:
       - php
       - mysql
