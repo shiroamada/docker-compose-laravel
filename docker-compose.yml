@@ -42,9 +42,20 @@ services:
       dockerfile: php.dockerfile
     container_name: php
     volumes:
-      - ../ndent:/var/www/html:delegated
+      - ../thesmoov_ref:/var/www/html:delegated
+      - ../thesmoov_ref/public/php.ini:/usr/local/etc/php/php.ini
+      - ../thesmoov_ref/public/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    environment:
+      - PHP_IDE_CONFIG=serverName=0.0.0.0:8080
+    expose:
+      - "9000"
+      - "9001"
+      - "9005"
+      - "10000"
     ports:
       - "9000:9000"
+      - "9001:9001"
+      - "10000:10000"
     networks:
       - laravel
 
@@ -54,7 +65,7 @@ services:
       dockerfile: composer.dockerfile
     container_name: composer
     volumes:
-      - ./ndent:/var/www/html
+      - ../thesmoov_ref:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
@@ -67,7 +78,7 @@ services:
     image: node:13.7
     container_name: npm
     volumes:
-      - ./ndent:/var/www/html
+      - ./thesmoov_ref:/var/www/html
     working_dir: /var/www/html
     entrypoint: ['npm']
 
@@ -77,7 +88,7 @@ services:
       dockerfile: php.dockerfile
     container_name: artisan
     volumes:
-      - ./ndent:/var/www/html:delegated
+      - ../thesmoov_ref:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
