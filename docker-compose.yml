@@ -12,7 +12,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ../thesmoov_ref:/var/www/html:delegated
+      - ../thesmoov-ref:/var/www/html:delegated
     depends_on:
       - php
       - mysql
@@ -42,9 +42,9 @@ services:
       dockerfile: php.dockerfile
     container_name: php
     volumes:
-      - ../thesmoov_ref:/var/www/html:delegated
-      - ../thesmoov_ref/public/php.ini:/usr/local/etc/php/php.ini
-      - ../thesmoov_ref/public/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ../thesmoov-ref:/var/www/html:delegated
+      - ../thesmoov-ref/public/php.ini:/usr/local/etc/php/php.ini
+      - ../thesmoov-ref/public/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     environment:
       - PHP_IDE_CONFIG=serverName=0.0.0.0:8080
     expose:
@@ -65,7 +65,7 @@ services:
       dockerfile: composer.dockerfile
     container_name: composer
     volumes:
-      - ../thesmoov_ref:/var/www/html
+      - ../thesmoov-ref:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
@@ -78,7 +78,7 @@ services:
     image: node:13.7
     container_name: npm
     volumes:
-      - ./thesmoov_ref:/var/www/html
+      - ./thesmoov-ref:/var/www/html
     working_dir: /var/www/html
     entrypoint: ['npm']
 
@@ -88,7 +88,7 @@ services:
       dockerfile: php.dockerfile
     container_name: artisan
     volumes:
-      - ../thesmoov_ref:/var/www/html:delegated
+      - ../thesmoov-ref:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
