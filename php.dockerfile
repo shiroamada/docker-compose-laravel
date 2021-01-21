@@ -17,3 +17,5 @@ RUN pecl install xdebug-2.9.2 \
     && docker-php-ext-enable xdebug  \
     && docker-php-ext-install pdo pdo_mysql mysqli \
     && docker-php-ext-enable mysqli 
+
+RUN set -eux; apt-get update; apt-get install -y libzip-dev zlib1g-dev; docker-php-ext-install zip
