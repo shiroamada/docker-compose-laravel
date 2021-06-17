@@ -44,8 +44,8 @@ services:
     container_name: php
     volumes:
       - ../${APP_FOLDER}:/var/www/html:delegated
-      - ../${APP_FOLDER}/public/php.ini:/usr/local/etc/php/php.ini
-      - ../${APP_FOLDER}/public/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ../${APP_FOLDER}/php.ini:/usr/local/etc/php/php.ini
+      - ../${APP_FOLDER}/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     environment:
       - PHP_IDE_CONFIG=serverName=0.0.0.0:8080
     expose:
@@ -53,10 +53,11 @@ services:
       - "9001"
       - "9005"
       - "10000"
+      - "19000"
     ports:
-      - "9000:9000"
       - "9001:9001"
       - "10000:10000"
+      - "9000:9000"
     networks:
       - laravel
 
