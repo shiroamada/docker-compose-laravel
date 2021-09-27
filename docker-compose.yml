@@ -49,13 +49,12 @@ services:
     environment:
       - PHP_IDE_CONFIG=serverName=0.0.0.0:8080
     expose:
-      - "9000"
       - "9001"
       - "9005"
       - "10000"
     ports:
-      - "9000:9000"
       - "9001:9001"
+      - "9005:9005"
       - "10000:10000"
     networks:
       - laravel
