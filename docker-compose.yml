@@ -47,13 +47,13 @@ services:
       - ../${APP_FOLDER}/public/php.ini:/usr/local/etc/php/php.ini
       - ../${APP_FOLDER}/public/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     environment:
-      - PHP_IDE_CONFIG=serverName=0.0.0.0:8080
+      - PHP_IDE_CONFIG=serverName=0.0.0.0:28080
     expose:
-      - "9001"
+      - "9000"
       - "9005"
       - "10000"
     ports:
-      - "9001:9001"
+      - "9000:9000"
       - "9005:9005"
       - "10000:10000"
     networks:

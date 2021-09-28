@@ -1,4 +1,4 @@
-FROM php:7.3-fpm-buster
+FROM php:8.0-fpm-buster
 
 ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
 
@@ -13,7 +13,7 @@ RUN chown laravel:laravel /var/www/html
 
 WORKDIR /var/www/html
 
-RUN pecl install xdebug-2.9.2 \
+RUN pecl install xdebug-3.0.4 \
     && docker-php-ext-enable xdebug  \
     && docker-php-ext-install pdo pdo_mysql mysqli \
     && docker-php-ext-enable mysqli 

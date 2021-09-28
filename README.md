@@ -12,7 +12,7 @@ After that completes, follow the steps from the [src/README.md](src/README.md) f
 
 Bringing up the Docker Compose network with `site` instead of just using `up`, ensures that only our site's containers are brought up at the start, instead of all of the command containers as well. The following are built for our web server, with their exposed ports detailed:
 
-- **nginx** - `:8080`
+- **nginx** - `:28080`
 - **mysql** - `:3306`
 - **php** - `:9000`
 
