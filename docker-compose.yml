@@ -12,7 +12,7 @@ services:
     ports:
       - "28080:80"
     volumes:
-      - ../${APP_FOLDER}:/var/www/html:delegated
+      - ../laravel9:/var/www/html:delegated
     depends_on:
       - php
       - mysql
@@ -43,9 +43,9 @@ services:
       dockerfile: php.dockerfile
     container_name: php
     volumes:
-      - ../${APP_FOLDER}:/var/www/html:delegated
-      - ../${APP_FOLDER}/public/php.ini:/usr/local/etc/php/php.ini
-      - ../${APP_FOLDER}/public/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ../laravel9:/var/www/html:delegated
+      - ../laravel9/public/php.ini:/usr/local/etc/php/php.ini
+      - ../laravel9/public/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     environment:
       - PHP_IDE_CONFIG=serverName=0.0.0.0:28080
     expose:
@@ -65,7 +65,7 @@ services:
       dockerfile: composer.dockerfile
     container_name: composer
     volumes:
-      - ../${APP_FOLDER}:/var/www/html
+      - ../laravel9:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
@@ -78,7 +78,7 @@ services:
     image: node:13.7
     container_name: npm
     volumes:
-      - ./${APP_FOLDER}:/var/www/html
+      - ./laravel9:/var/www/html
     working_dir: /var/www/html
     entrypoint: ['npm']
 
@@ -88,7 +88,7 @@ services:
       dockerfile: php.dockerfile
     container_name: artisan
     volumes:
-      - ../${APP_FOLDER}:/var/www/html:delegated
+      - ../laravel9:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
