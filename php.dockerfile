@@ -1,4 +1,4 @@
-FROM php:7.3-fpm-buster
+FROM php:5.6-fpm
 
 ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
 
@@ -13,12 +13,22 @@ RUN chown laravel:laravel /var/www/html
 
 WORKDIR /var/www/html
 
-RUN pecl install xdebug-2.9.2 \
-    && docker-php-ext-enable xdebug  \
-    && docker-php-ext-install pdo pdo_mysql mysqli \
-    && docker-php-ext-enable mysqli 
+RUN apt-get update && \
+apt-get install -y libmcrypt-dev
+
+# RUN pecl install mcrypt-1.0.4
+
+RUN docker-php-ext-configure mcrypt \
+    && docker-php-ext-install mcrypt
+
+RUN docker-php-ext-install pdo pdo_mysql mysqli \
+    && docker-php-ext-enable mysqli \
+    && docker-php-ext-enable mcrypt
 
 RUN apt-get update && \
 apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev && \
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-docker-php-ext-install gd
+docker-php-ext-install gd 
+
+RUN apt-get install -y libzip-dev \
+&& docker-php-ext-install zip 

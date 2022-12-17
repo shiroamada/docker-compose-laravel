@@ -12,7 +12,7 @@ services:
     ports:
       - "28080:80"
     volumes:
-      - ../ndent:/var/www/html:delegated
+      - ../pendrive:/var/www/html:delegated
     depends_on:
       - php
       - mysql
@@ -42,7 +42,7 @@ services:
       dockerfile: php.dockerfile
     container_name: php
     volumes:
-      - ../ndent:/var/www/html:delegated
+      - ../pendrive:/var/www/html:delegated
     ports:
       - "9000:9000"
     networks:
@@ -54,7 +54,7 @@ services:
       dockerfile: composer.dockerfile
     container_name: composer
     volumes:
-      - ./ndent:/var/www/html
+      - ./pendrive:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
@@ -67,7 +67,7 @@ services:
     image: node:13.7
     container_name: npm
     volumes:
-      - ./ndent:/var/www/html
+      - ./pendrive:/var/www/html
     working_dir: /var/www/html
     entrypoint: ['npm']
 
@@ -77,7 +77,7 @@ services:
       dockerfile: php.dockerfile
     container_name: artisan
     volumes:
-      - ./ndent:/var/www/html:delegated
+      - ./pendrive:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
