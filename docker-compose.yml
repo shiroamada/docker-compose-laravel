@@ -8,7 +8,7 @@ services:
     build:
       context: .
       dockerfile: nginx.dockerfile
-    container_name: nginx
+    container_name: nginx-docker
     ports:
       - "28080:80"
     volumes:
@@ -20,20 +20,19 @@ services:
       - laravel
 
   mysql:
-    image: mysql:5.7.29
-    platform: linux/x86_64
-    container_name: mysql
+    image: biarms/mysql:5
+    container_name: mysql-docker
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - "33307:3306"
     environment:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      SERVICE_NAME: mysql-docker
     networks:
       - laravel
 
@@ -41,7 +40,7 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
-    container_name: php
+    container_name: php-docker
     volumes:
       - ../${APP_FOLDER}:/var/www/html:delegated
       - ../${APP_FOLDER}/php.ini:/usr/local/etc/php/php.ini
@@ -58,43 +57,5 @@ services:
       - "9001:9001"
       - "10000:10000"
       - "9000:9000"
-    networks:
-      - laravel
-
-  composer:
-    build:
-      context: .
-      dockerfile: composer.dockerfile
-    container_name: composer
-    volumes:
-      - ../${APP_FOLDER}:/var/www/html
-    working_dir: /var/www/html
-    depends_on:
-      - php
-    user: laravel
-    networks:
-      - laravel
-    entrypoint: ['composer', '--ignore-platform-reqs']
-
-  npm:
-    image: node:13.7
-    container_name: npm
-    volumes:
-      - ./${APP_FOLDER}:/var/www/html
-    working_dir: /var/www/html
-    entrypoint: ['npm']
-
-  artisan:
-    build:
-      context: .
-      dockerfile: php.dockerfile
-    container_name: artisan
-    volumes:
-      - ../${APP_FOLDER}:/var/www/html:delegated
-    depends_on:
-      - mysql
-    working_dir: /var/www/html
-    user: laravel
-    entrypoint: ['php', '/var/www/html/artisan']
     networks:
       - laravel
