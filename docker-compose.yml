@@ -20,16 +20,16 @@ services:
       - laravel
 
   mysql:
-    image: mysql:5.7.29
+    image: mariadb:10.5.8
     platform: linux/x86_64
     container_name: mysql
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - "33306:3306"
     environment:
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: homestead
+      MYSQL_DATABASE: biowell
+      MYSQL_USER: biowell
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
@@ -51,7 +51,7 @@ services:
     expose:
       - "9000"
     ports:
-      - "9000:9000"
+      - "9001:9000"
     networks:
       - laravel
 
