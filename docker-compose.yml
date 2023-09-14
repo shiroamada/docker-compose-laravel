@@ -43,8 +43,8 @@ services:
     container_name: php-docker
     volumes:
       - ../${APP_FOLDER}:/var/www/html:delegated
-      - ../${APP_FOLDER}/php.ini:/usr/local/etc/php/php.ini
-      - ../${APP_FOLDER}/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      #- ../${APP_FOLDER}/php.ini:/usr/local/etc/php/php.ini
+      #- ../${APP_FOLDER}/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     environment:
       - PHP_IDE_CONFIG=serverName=0.0.0.0:8080
     expose:

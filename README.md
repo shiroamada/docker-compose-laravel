@@ -47,7 +47,10 @@ docker-compose down
 
 #access to container 
 ```
-docker exec -it nginx /bin/sh
+docker exec -it nginx-docker /bin/sh
 
-docker exec -it php bash
+docker exec -it php-docker bash
 ```
+
+**UPDATE 2023, due to old image
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list

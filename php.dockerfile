@@ -13,6 +13,8 @@ RUN chown laravel:laravel /var/www/html
 
 WORKDIR /var/www/html
 
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+
 RUN apt-get update && \
     apt-get install -y libmcrypt-dev 
 
