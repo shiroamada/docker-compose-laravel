@@ -20,12 +20,16 @@ services:
       - laravel
 
   mysql:
-    image: biarms/mysql:5
+    platform: linux/amd64
+    image: mysql:5.5
     container_name: mysql-docker
     restart: unless-stopped
     tty: true
+    command: --innodb-use-native-aio=0
     ports:
       - "33307:3306"
+    volumes:
+      - ./pentair/mysql_data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
